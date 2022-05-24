@@ -1,0 +1,84 @@
+# LookAt 100 0 0  0 0 1  0 1 0
+# Rotate 30 0 0 1
+# Camera "perspective" "float fov" [ 45 ]
+# zoom in by feet
+# "integer xresolution" [1500] "integer yresolution" [1500]
+#	"float cropwindow" [ .34 .49  .67 .8 ]
+Film "rgb"
+    "string filename" [ "out.exr" ]
+    "integer xresolution" [ 200 ]
+    "integer yresolution" [ 200 ]
+Sampler "halton"
+    "integer pixelsamples" [ 8 ]
+
+
+WorldBegin
+
+
+AttributeBegin
+    Material "diffuse"
+        "rgb reflectance" [ 0 0 0 ]
+    Translate 80 80 80
+    AreaLightSource "diffuse"
+        "rgb L" [ 2000 2000 2000 ]
+    Shape "sphere"
+        "float radius" [ 3 ]
+AttributeEnd
+
+AttributeBegin
+    Material "diffuse"
+        "rgb reflectance" [ 0.5 0.5 0.8 ]
+	Scale 5 5 5
+    # X负向
+	Shape "trianglemesh"
+        "point3 P" [
+            -100 -100 -100
+            -100 100 -100
+            -100 100 100
+            -100 -100 100 ]
+        "integer indices" [ 0 1 2 0 2 3 ]
+    # X正向
+	Shape "trianglemesh"
+        "point3 P" [
+            100 -100 -100
+            100 100 -100
+            100 100 100
+            100 -100 100 ]
+        "integer indices" [ 0 2 1 0 3 2 ]
+	# Y负向
+    Shape "trianglemesh"
+        "point3 P" [
+            -100 -100 -100
+            -100 -100 100
+            100 -100 100
+            100 -100 -100 ]
+        "integer indices" [ 0 1 2 0 2 3 ]
+	# Y正向
+    Shape "trianglemesh"
+        "point3 P" [
+            -100 100 -100
+            -100 100 100
+            100 100 100
+            100 100 -100 ]
+        "integer indices" [ 0 2 1 0 3 2 ]
+	# Z负向
+    Shape "trianglemesh"
+        "point3 P" [
+            -100 -100 -100
+            100 -100 -100
+            100 100 -100
+            -100 100 -100 ]
+        "integer indices" [ 0 1 2 0 2 3 ]
+	# Z正向
+    Shape "trianglemesh"
+        "point3 P" [
+            -100 -100 100
+            100 -100 100
+            100 100 100
+            -100 100 100 ]
+        "integer indices" [ 0 2 1 0 3 2 ]
+AttributeEnd
+
+#AttributeBegin
+${ObjData}
+#AttributeEnd
